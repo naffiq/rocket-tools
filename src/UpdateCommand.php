@@ -23,16 +23,18 @@ class UpdateCommand extends Command
         $updater->setStrategy(Updater::STRATEGY_GITHUB);
         $updater->getStrategy()->setPackageName('naffiq/rocket-tools');
         $updater->getStrategy()->setPharName('rocket-tools.phar');
-        $updater->getStrategy()->setCurrentLocalVersion('v0.1.0');
+        $updater->getStrategy()->setCurrentLocalVersion('v0.1.1');
         try {
             $result = $updater->update();
-            $output->writeln($result ? 'Updated to the latest version. Check it out by outputting ' : 'No updates');
-            echo $result ? "Updated!\n" : "No update needed!\n";
+            $output->writeln($result
+                ? '<info>Updated to the latest version. Check it out by running</info> <question>rocket-tools --version</question>'
+                : '<comment>No updates</comment>'
+            );
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
-            $output->writeln('Oops, seems like something happened during update :(');
-            $output->writeln('Check your internet connection or post an issue here:');
-            $output->writeln('https://github.com/naffiq/rocket-tools/issues');
+            $output->writeln('<error>Oops, seems like something happened during update :(</error>');
+            $output->writeln('<error>Check your internet connection or post an issue here:</error>');
+            $output->writeln('<error>https://github.com/naffiq/rocket-tools/issues</error>');
         }
     }
 }
