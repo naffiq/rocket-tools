@@ -14,6 +14,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class GenerateCommand
+ *
+ * Generates nginx configuration for your projects.
+ *
+ * @package naffiq\RocketTools\nginx
+ */
 class GenerateCommand extends Command
 {
     /**

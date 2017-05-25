@@ -9,11 +9,16 @@
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/rocket-tools-autoload.php';
 
-use naffiq\RocketTools\nginx\GenerateCommand;
 use Symfony\Component\Console\Application;
+
+use naffiq\RocketTools\nginx\GenerateCommand;
+use naffiq\RocketTools\config\ConfigUpdateCommand;
+use naffiq\RocketTools\config\ConfigGetCommand;
 
 $application = new Application('RocketFirm Toolbox', 'v0.1.0');
 
 $application->add(new GenerateCommand());
+$application->add(new ConfigUpdateCommand());
+$application->add(new ConfigGetCommand());
 
 $application->run();
