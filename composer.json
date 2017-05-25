@@ -2,8 +2,12 @@
     "name": "naffiq/rocket-tools",
     "description": "RocketFirm tools to jumpstart with development",
     "type": "project",
+    "support": {
+        "issues": "https://github.com/naffiq/rocket-tools/issues"
+    },
     "require": {
-        "symfony/console": "^3.2"
+        "symfony/console": "^3.2",
+        "padraic/phar-updater": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"
@@ -12,8 +16,22 @@
     "authors": [
         {
             "name": "naffiq",
-            "email": "galymzhan@rocketfirm.com"
+            "email": "galymzhan@rocketfirm.com",
+            "homepage": "https://naffiq.com"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "naffiq\\RocketTools\\": "src/",
+            "naffiq\\RocketTools\\config": "src/config",
+            "naffiq\\RocketTools\\nginx": "src/nginx"
+        }
+    },
+    "bin": [
+        "bin/box"
+    ],
+    "config": {
+        "bin-dir": "bin"
+    }
 }
