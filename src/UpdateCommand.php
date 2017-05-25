@@ -1,8 +1,10 @@
 <?php
 namespace naffiq\RocketTools;
 
+use Humbug\SelfUpdate\Strategy\GithubStrategy;
 use Humbug\SelfUpdate\Updater;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -12,22 +14,28 @@ class UpdateCommand extends Command
     {
         $this
             ->setName('self-update')
-            ->setDescription('Looks up for the latest release of Rocket Tools');
+            ->setDescription('Looks up for the latest release of Rocket Tools')
+            ->addArgument('stability', InputArgument::OPTIONAL, 'Set stability (stable|unstable|any)', 'stable');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $stability = $input->getArgument('stability');
+
         $output->writeln('Checking for the latest release...');
 
-        $updater = new Updater(null, false);
-        $updater->setStrategy(Updater::STRATEGY_GITHUB);
+        $updater = new Updater(null, false, Updater::STRATEGY_GITHUB);
+
+        $updater->getStrategy()->setStability($stability);
         $updater->getStrategy()->setPackageName('naffiq/rocket-tools');
         $updater->getStrategy()->setPharName('rocket-tools.phar');
-        $updater->getStrategy()->setCurrentLocalVersion('v0.1.1');
+        $updater->getStrategy()->setCurrentLocalVersion($this->getApplication()->getVersion());
+
         try {
             $result = $updater->update();
+            $newVersion = $updater->getNewVersion();
             $output->writeln($result
-                ? '<info>Updated to the latest version. Check it out by running</info> <question>rocket-tools --version</question>'
+                ? "<info>Updated to the version {$newVersion}.</info>"
                 : '<comment>No updates</comment>'
             );
         } catch (\Exception $e) {
