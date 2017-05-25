@@ -9,6 +9,7 @@
 namespace naffiq\RocketTools\nginx;
 
 
+use naffiq\RocketTools\config\ConfigHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,22 +33,21 @@ class GenerateCommand extends Command
             ->setName('nginx:generate')
             ->setDescription('Generates nginx config for development')
             ->addArgument(
-                'config-path', InputArgument::REQUIRED,
-                'Path of sites-available folder'
-            )->addArgument(
                 'server-name', InputArgument::REQUIRED,
                 'Domain (server_name) for newly created app'
             )->addArgument(
                 'document-root', InputArgument::OPTIONAL,
                 'Document root for your project. If not set, taken from run directory', getcwd()
             )->addArgument(
-                'port', InputArgument::OPTIONAL,
-                'Listen port. Default = 80', 80
+                'config-path', InputArgument::OPTIONAL,
+                'Path of sites-available folder', ConfigHelper::get('nginx-sites-available', '/etc/nginx/sites-available')
             )->addArgument(
                 'config-name', InputArgument::OPTIONAL,
-                'File name for your config file. If not set first server-name is used', null
+                'File name for your config file. If not set first server-name is used'
+            )->addArgument(
+                'port', InputArgument::OPTIONAL,
+                'Listen port.', ConfigHelper::get('nginx-port', 80)
             );
-
     }
 
     /**

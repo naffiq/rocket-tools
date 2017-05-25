@@ -17,16 +17,21 @@ class Generator
 
     private $port;
 
-    private $phpFpm;
+    private $fastCGIPass;
 
-    public function __construct($documentRoot, $serverName, $port = 80, $phpFpm = [
-        'isSocket' => true, 'socketPath' => 'unix:/var/run/php7.1-fpm.sock'
-    ])
+    /**
+     * Generator constructor.
+     * @param string $documentRoot
+     * @param string $serverName
+     * @param int $port
+     * @param string $fastCGIPass
+     */
+    public function __construct($documentRoot, $serverName, $port, $fastCGIPass)
     {
         $this->documentRoot = $documentRoot;
         $this->serverName = $serverName;
         $this->port = $port;
-        $this->phpFpm = $phpFpm;
+        $this->fastCGIPass = $fastCGIPass;
     }
 
     public function getConfig()
@@ -60,7 +65,7 @@ server {
             set \$fsn \$fastcgi_script_name;
         }
 
-        fastcgi_pass unix:/var/run/php7.1-fpm.sock;
+        fastcgi_pass $this->fastCGIPass;
         include fastcgi_params;
         fastcgi_param  SCRIPT_FILENAME  \$document_root\$fsn;
 
