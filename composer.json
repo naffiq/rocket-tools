@@ -1,0 +1,19 @@
+{
+    "name": "naffiq/rocket-tools",
+    "description": "RocketFirm tools to jumpstart with development",
+    "type": "project",
+    "require": {
+        "symfony/console": "^3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "naffiq",
+            "email": "galymzhan@rocketfirm.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

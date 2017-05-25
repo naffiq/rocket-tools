@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Jumpstart your development process by automatically generating config files!
+ *
+ * @author naffiq <naffiq@gmail.com>
+ */
+
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/rocket-tools-autoload.php';
+
+use naffiq\RocketTools\nginx\GenerateCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application('RocketFirm Toolbox', 'v0.1.0');
+
+$application->add(new GenerateCommand());
+
+$application->run();
