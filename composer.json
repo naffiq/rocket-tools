@@ -24,8 +24,8 @@
     "autoload": {
         "psr-4": {
             "naffiq\\RocketTools\\": "src/",
-            "naffiq\\RocketTools\\config": "src/config",
-            "naffiq\\RocketTools\\nginx": "src/nginx"
+            "naffiq\\RocketTools\\config\\": "src/config",
+            "naffiq\\RocketTools\\nginx\\": "src/nginx"
         }
     },
     "bin": [
