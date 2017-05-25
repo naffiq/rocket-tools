@@ -46,6 +46,7 @@ class ConfigUpdateCommand extends Command
 
         ConfigHelper::set($configName, $configValue);
 
-        $output->writeln('Configuration successfully updated to file ' . ConfigHelper::getConfigFile());
+        $output->writeln('<info>Configuration successfully updated to file </info>'.
+            '<comment>' . ConfigHelper::getConfigFile() . '</comment>');
     }
 }

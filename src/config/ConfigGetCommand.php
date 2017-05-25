@@ -13,6 +13,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ConfigGetCommand
+ *
+ * Shows current configurations
+ *
+ * @package naffiq\RocketTools\config
+ */
 class ConfigGetCommand extends Command
 {
     /**
@@ -33,15 +40,24 @@ class ConfigGetCommand extends Command
     {
         $configName = $input->getArgument('config-name');
 
-        $output->writeln('Displaying all config values');
-
         if (empty($configName)) {
-            foreach (ConfigHelper::getAll() as $key => $value) {
-                $output->writeln(" - \"{$key}\" = \"{$value}\"");
+            $allConfigs = ConfigHelper::getAll();
+
+            if (!empty($allConfigs)) {
+                $output->writeln('<info>Displaying all config values</info>');
+                foreach ($allConfigs as $key => $value) {
+                    $output->writeln("<comment>{$key}</comment> = <question> {$value} </question>");
+                }
+            } else {
+                $output->writeln('<comment>No local configs found</comment>');
             }
         } else {
-            $output->writeln($configName . ' = ' . ConfigHelper::get($configName));
+            $config = ConfigHelper::get($configName);
+            if ($config !== null) {
+                $output->writeln("<comment>{$configName}</comment> = <question> {$config} </question>");
+            } else {
+                $output->writeln("<comment>{$configName}</comment> wasn't found in your configs");
+            }
         }
-
     }
 }
