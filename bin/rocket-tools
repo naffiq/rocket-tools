@@ -21,7 +21,7 @@ use naffiq\RocketTools\nginx\LinkCommand;
 use naffiq\RocketTools\nginx\UnlinkCommand;
 
 
-$application = new Application('RocketFirm Toolbox', 'v0.1.1');
+$application = new Application('RocketFirm Toolbox', 'v0.1.2');
 
 $application->add(new ConfigUpdateCommand());
 $application->add(new ConfigGetCommand());
