@@ -47,6 +47,9 @@ class GenerateCommand extends Command
             )->addArgument(
                 'port', InputArgument::OPTIONAL,
                 'Listen port.', ConfigHelper::get('nginx-port', 80)
+            )->addArgument(
+                'fast-cgi-pass', InputArgument::OPTIONAL,
+                'Fast CGI pass.', ConfigHelper::get('fast-cgi-pass', 'unix:/var/run/php7.1-fpm.sock')
             );
     }
 
@@ -62,14 +65,15 @@ class GenerateCommand extends Command
         $documentRoot = $input->getArgument('document-root');
         $port = $input->getArgument('port');
         $configName = $this->getConfigName($input);
+        $fastCGIPass = $input->getArgument('fast-cgi-pass');
 
-        $generator = new Generator($documentRoot, $serverName, $port);
+        $generator = new Generator($documentRoot, $serverName, $port, $fastCGIPass);
 
         $filePath = "{$configPath}/{$configName}";
 
         file_put_contents($filePath, $generator->getConfig());
 
-        $output->writeln("File {$filePath} successfully created");
+        $output->writeln("<info>File </info><comment>{$filePath}</comment><info> successfully created</info>");
     }
 
     /**
