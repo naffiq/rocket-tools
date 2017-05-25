@@ -29,7 +29,7 @@
         }
     },
     "bin": [
-        "bin/box"
+        "bin/rocket-tools"
     ],
     "config": {
         "bin-dir": "bin"
