@@ -33,7 +33,7 @@ class ConfigGetCommand extends Command
     {
         $configName = $input->getArgument('config-name');
 
-        $output->writeln('Displaying all config files ');
+        $output->writeln('Displaying all config values');
 
         if (empty($configName)) {
             foreach (ConfigHelper::getAll() as $key => $value) {
