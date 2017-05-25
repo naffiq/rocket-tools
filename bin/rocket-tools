@@ -12,12 +12,18 @@ require __DIR__ . '/../src/rocket-tools-autoload.php';
 use Symfony\Component\Console\Application;
 
 use naffiq\RocketTools\nginx\GenerateCommand;
+use naffiq\RocketTools\nginx\LinkCommand;
+use naffiq\RocketTools\nginx\UnlinkCommand;
+
 use naffiq\RocketTools\config\ConfigUpdateCommand;
 use naffiq\RocketTools\config\ConfigGetCommand;
 
 $application = new Application('RocketFirm Toolbox', 'v0.1.0');
 
 $application->add(new GenerateCommand());
+$application->add(new LinkCommand());
+$application->add(new UnlinkCommand());
+
 $application->add(new ConfigUpdateCommand());
 $application->add(new ConfigGetCommand());
 
