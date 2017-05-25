@@ -26,21 +26,26 @@ class Generator
         $this->documentRoot = $documentRoot;
         $this->serverName = $serverName;
         $this->port = $port;
-        $this->phpFpm;
+        $this->phpFpm = $phpFpm;
     }
 
     public function getConfig()
     {
         return <<<CONF
 server {
-    listen 80;
+    listen $this->port;
    
-    root /path/to/app;
+    
+    set \$host_path "$this->documentRoot";
+    set \$yii_bootstrap "index.php";
+  
+    root \$host_path;
+
 
     client_max_body_size 128m;
     charset utf-8;
 
-    server_name app.dev;
+    server_name $this->serverName;
 
     location / {
         try_files \$uri \$uri/ /index.php?\$args;
