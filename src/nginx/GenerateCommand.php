@@ -39,7 +39,7 @@ class GenerateCommand extends Command
                 'document-root', InputArgument::OPTIONAL,
                 'Document root for your project. If not set, taken from run directory', getcwd()
             )->addArgument(
-                'config-path', InputArgument::OPTIONAL,
+                'sites-available', InputArgument::OPTIONAL,
                 'Path of sites-available folder', ConfigHelper::get('nginx-sites-available', '/etc/nginx/sites-available')
             )->addArgument(
                 'config-name', InputArgument::OPTIONAL,
@@ -82,7 +82,7 @@ class GenerateCommand extends Command
      */
     protected function getConfigPath(InputInterface $input)
     {
-        return rtrim($input->getArgument('config-path'), '/');
+        return rtrim($input->getArgument('sites-available'), '/');
     }
 
     /**
