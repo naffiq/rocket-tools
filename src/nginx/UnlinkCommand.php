@@ -38,12 +38,12 @@ class UnlinkCommand extends Command
         $fileName = $sitesEnabledPath . '/' . $siteName . '.conf';
 
         if (!file_exists($fileName)) {
-            $output->writeln("File {$fileName} doesn't exist" );
+            $output->writeln("<error>File </error><comment>{$fileName}</comment><error> doesn't exist</error>");
             die(1);
         }
 
         unlink($fileName);
 
-        $output->writeln("File {$fileName} unlinked");
+        $output->writeln("<info>File </info><comment>{$fileName}</comment><info> unlinked</info>");
     }
 }

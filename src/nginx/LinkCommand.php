@@ -42,12 +42,12 @@ class LinkCommand extends Command
         $outFileName = $sitesEnabledPath . '/' . $siteName . '.conf';
 
         if (!file_exists($fileName)) {
-            $output->writeln("File {$fileName} doesn't exist" );
+            $output->writeln("<error>File </error><comment>{$fileName}</comment><error> doesn't exist</error>");
             die(1);
         }
 
         link($fileName, $outFileName);
 
-        $output->writeln("File {$fileName} linked to {$outFileName}");
+        $output->writeln("<info>File </info><comment>{$fileName}</comment><info> linked to </info><comment>{$outFileName}</comment><info></info>");
     }
 }
