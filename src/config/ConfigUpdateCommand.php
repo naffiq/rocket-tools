@@ -30,6 +30,7 @@ class ConfigUpdateCommand extends Command
     {
         $this
             ->setName('config:update')
+            ->setAliases(['config:set'])
             ->setDescription('Updates configurations for Rocket Tools')
             ->addArgument('config-name', InputArgument::REQUIRED, 'Configuration key')
             ->addArgument('config-value', InputArgument::REQUIRED, 'Configuration value');
