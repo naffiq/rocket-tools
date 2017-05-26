@@ -6,7 +6,15 @@
  * @author naffiq <naffiq@gmail.com>
  */
 
-require __DIR__ . '/../vendor/autoload.php';
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require __DIR__ . '/../../../autoload.php';
+} else {
+    echo 'Install dependencies by running composer install';
+    exit(1);
+}
+
 require __DIR__ . '/../src/rocket-tools-autoload.php';
 
 use Symfony\Component\Console\Application;
@@ -21,7 +29,7 @@ use naffiq\RocketTools\nginx\LinkCommand;
 use naffiq\RocketTools\nginx\UnlinkCommand;
 
 
-$application = new Application('RocketFirm Toolbox', 'v0.2.0');
+$application = new Application('RocketFirm Toolbox', 'v0.2.1');
 
 $application->add(new ConfigUpdateCommand());
 $application->add(new ConfigGetCommand());
