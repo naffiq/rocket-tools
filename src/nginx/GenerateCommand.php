@@ -36,14 +36,14 @@ class GenerateCommand extends Command
                 'server-name', InputArgument::REQUIRED,
                 'Domain (server_name) for newly created app'
             )->addArgument(
+                'config-name', InputArgument::OPTIONAL,
+                'File name for your config file. If not set first server-name is used'
+            )->addArgument(
                 'document-root', InputArgument::OPTIONAL,
                 'Document root for your project. If not set, taken from run directory', getcwd()
             )->addArgument(
                 'sites-available', InputArgument::OPTIONAL,
                 'Path of sites-available folder', ConfigHelper::get('nginx-sites-available', '/etc/nginx/sites-available')
-            )->addArgument(
-                'config-name', InputArgument::OPTIONAL,
-                'File name for your config file. If not set first server-name is used'
             )->addArgument(
                 'port', InputArgument::OPTIONAL,
                 'Listen port.', ConfigHelper::get('nginx-port', 80)
