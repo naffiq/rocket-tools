@@ -28,14 +28,14 @@ $ rocket-tools --version
 
 You can create nginx config in sites-available for your Yii2 project (basic for now) by running
 ```bash
-$ rocket-tools nginx:generate <server-name> [<document-root>] [<sites-available>] [<config-name>] [<port>] [<fast-cgi-pass>]
+$ rocket-tools nginx:generate <server-name> [<config-name>] [<document-root>] [<sites-available>] [<port>] [<fast-cgi-pass>]
 ```
 
 This command takes following arguments:
 -  `server-name`           Domain (server_name) for newly created app
+-  `config-name`           File name for your config file. If not set first `server-name` is used
 -  `document-root`         Document root for your project. If not set, taken from run directory. **default: "CURRENT/RUNNING/DIRECTORY"**
 -  `sites-available`       Path of sites-available folder **default: "/etc/nginx/sites-available"**
--  `config-name`           File name for your config file. If not set first `server-name` is used
 -  `port`                  Listen port. **default: 80**
 -  `fast-cgi-pass`         Fast CGI pass. **default: "unix:/var/run/php7.1-fpm.sock"**
 
